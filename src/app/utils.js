@@ -38,3 +38,18 @@ export function getPointPositionRelativeToPlane(triangle, point) {
             )
         );
 }
+
+export function multiplyMatrixByVector(matrix, vector) {
+    let finalVector = [0,0,0,0];
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
+            finalVector[i] += matrix[i][j] * vector[j];
+        }
+    }
+    
+    return finalVector;
+}
+
+export function createVector(point3D) {
+    return [point3D.x, point3D.y, point3D.z, 1.0];
+}

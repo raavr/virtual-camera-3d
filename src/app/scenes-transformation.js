@@ -1,5 +1,6 @@
 import { TransformationMatrix } from './transformation-matrix';
 import { FocalLength, AXIS } from './consts';
+import { multiplyMatrixByVector, createVector } from './utils';
 
 export class Transformation {
 
@@ -8,30 +9,15 @@ export class Transformation {
         this.matrix = new TransformationMatrix();
     }
 
-    multiplyMatrixByVector(matrix, vector) {
-        let finalVector = [0,0,0,0];
-        for (let i = 0; i < 4; i++) {
-            for (let j = 0; j < 4; j++) {
-                finalVector[i] += matrix[i][j] * vector[j];
-            }
-        }
-        
-        return finalVector;
-    }
-
-    createVector(point3D) {
-        return [point3D.x, point3D.y, point3D.z, 1.0];
-    }
-
     updateTriangles(matrix) {
         this.scenesObjects.triangles3D.forEach((triangle) => {     
-            let finalVector = this.multiplyMatrixByVector(matrix, this.createVector(triangle.a));
+            let finalVector = multiplyMatrixByVector(matrix, createVector(triangle.a));
             triangle.a.updatePoint(finalVector);
             
-            finalVector = this.multiplyMatrixByVector(matrix, this.createVector(triangle.b));
+            finalVector = multiplyMatrixByVector(matrix, createVector(triangle.b));
             triangle.b.updatePoint(finalVector);
 
-            finalVector = this.multiplyMatrixByVector(matrix, this.createVector(triangle.c));
+            finalVector = multiplyMatrixByVector(matrix, createVector(triangle.c));
             triangle.c.updatePoint(finalVector);
         })
     }
