@@ -5,6 +5,7 @@ export class ScenesObjects {
     
     constructor(points) {
         this.triangles3D = [];
+        this.triangles2D = [];
         this.create3DTriangles(points);
     }
 
@@ -17,6 +18,10 @@ export class ScenesObjects {
            this.triangles3D.push(new Triangle(a, b, c));
         }
 
+    }
+
+    add2DTriangle(triangle) {
+        this.triangles2D.push(triangle);
     }
 
 }

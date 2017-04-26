@@ -1,4 +1,5 @@
 export const ROUND_PRECISION = 100000;
+export const FocalLength = 300;
 
 export const POINTS_3D = [
     [
