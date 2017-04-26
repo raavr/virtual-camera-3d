@@ -20,8 +20,7 @@ export class Scene {
     }
 
     make2DProjecton() {
-        this.scenesObjects.clear();
-        this.scenesObjects.triangles3D.forEach((t) => {
+        this.scenesObjects.sortedTriangles.forEach((t) => {
             this.scenesObjects.add2DTriangle(new Triangle(this.to2DPoint(t.a), this.to2DPoint(t.b), this.to2DPoint(t.c)));
         });
     }
@@ -29,12 +28,14 @@ export class Scene {
     paint() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.scenesObjects.triangles2D.forEach((t) => {
+            this.ctx.fillStyle = '#f00';
             this.ctx.strokeStyle = '#000';
             this.ctx.beginPath();
             this.ctx.moveTo(Math.round(t.a.x), Math.round(t.a.y));
             this.ctx.lineTo(Math.round(t.b.x), Math.round(t.b.y));
             this.ctx.lineTo(Math.round(t.c.x), Math.round(t.c.y));
             this.ctx.stroke();
+            this.ctx.fill();
             this.ctx.closePath();
        });
 
