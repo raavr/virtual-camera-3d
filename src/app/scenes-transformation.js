@@ -23,22 +23,16 @@ export class Transformation {
         return [point3D.x, point3D.y, point3D.z, 1.0];
     }
 
-    updatePoint(point3D, vector) {
-        point3D.x = vector[0];
-        point3D.y = vector[1];
-        point3D.z = vector[2];
-    }
-
     updateTriangles(matrix) {
         this.scenesObjects.triangles3D.forEach((triangle) => {     
             let finalVector = this.multiplyMatrixByVector(matrix, this.createVector(triangle.a));
-            this.updatePoint(triangle.a, finalVector);
+            triangle.a.updatePoint(finalVector);
             
             finalVector = this.multiplyMatrixByVector(matrix, this.createVector(triangle.b));
-            this.updatePoint(triangle.b, finalVector);
+            triangle.b.updatePoint(finalVector);
 
             finalVector = this.multiplyMatrixByVector(matrix, this.createVector(triangle.c));
-            this.updatePoint(triangle.c, finalVector);
+            triangle.c.updatePoint(finalVector);
         })
     }
 
