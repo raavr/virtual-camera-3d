@@ -4,9 +4,9 @@ import { Triangle } from './triangle';
 
 export class Scene {
 
-    constructor(scenesObject, canvas) {
+    constructor(scenesObjects, canvas) {
         this.canvas = canvas;
-        this.scenesObject = scenesObject;
+        this.scenesObjects = scenesObjects;
         this.ctx = this.canvas.getContext('2d');
     }
 
@@ -20,13 +20,15 @@ export class Scene {
     }
 
     make2DProjecton() {
-        this.scenesObject.triangles3D.forEach((t) => {
-            this.scenesObject.add2DTriangle(new Triangle(this.to2DPoint(t.a), this.to2DPoint(t.b), this.to2DPoint(t.c)));
+        this.scenesObjects.clear();
+        this.scenesObjects.triangles3D.forEach((t) => {
+            this.scenesObjects.add2DTriangle(new Triangle(this.to2DPoint(t.a), this.to2DPoint(t.b), this.to2DPoint(t.c)));
         });
     }
 
     paint() {
-        this.scenesObject.triangles2D.forEach((t) => {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.scenesObjects.triangles2D.forEach((t) => {
             this.ctx.strokeStyle = '#000';
             this.ctx.beginPath();
             this.ctx.moveTo(Math.round(t.a.x), Math.round(t.a.y));

@@ -24,4 +24,8 @@ export class ScenesObjects {
         this.triangles2D.push(triangle);
     }
 
+    clear() {
+        this.triangles2D = [];
+    }
+
 }
