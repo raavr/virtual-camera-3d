@@ -68,9 +68,25 @@ export class App {
         this.canvas.height = window.innerHeight;
     }
 
+    bindEvents() {
+        this.bindKeys();
+        this.bindResize();
+    } 
+
+    bindResize() {
+
+        let resize = () => {
+            this.setCanvas();
+            this.run();
+        };
+
+        window.addEventListener("resize", resize);
+
+    }
+
     init() {
         this.setCanvas();
-        this.bindKeys();
+        this.bindEvents();
         this.run();    
     }
 
