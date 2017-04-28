@@ -103,6 +103,10 @@ export class App {
 
     bindVirtualKeys() {
         let onVirtualKeyClick = (ev) => {
+            if(!ev.target.classList.contains("control-item")) {
+                return;
+            }
+
             let domAction = ev.target.getAttribute("data-action").split("-"),
                 action = domAction[0],
                 sign = domAction[1],
