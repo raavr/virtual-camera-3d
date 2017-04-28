@@ -12,51 +12,57 @@
     <body>
         <canvas></canvas>
         <div class="control-wrapper control-wrapper-translate">
-            <label for="translate-value" class="control-title">Translate</label>
-            <input type="text" class="transformation-value" id="translate-value">
-            <div class="error">Invalid value</div>
-            <div class="control-container">
-                <div class="control-col">
-                    <div class="control-row">
-                        <div class="control-item" data-action="translate-neg-Z">W</div>
+            <button class="minimize-btn" type="button">-</button>
+            <div class="control-content">
+                <label for="translate-value" class="control-title">Translate</label>
+                <input type="text" class="transformation-value" id="translate-value">
+                <div class="error">Invalid value</div>
+                <div class="control-container">
+                    <div class="control-col">
+                        <div class="control-row">
+                            <div class="control-item" data-action="translate-neg-Z">W</div>
+                        </div>
+                        <div class="control-row">
+                            <div class="control-item" data-action="translate-pos-X">A</div>
+                            <div class="control-item" data-action="translate-pos-Z">S</div>
+                            <div class="control-item" data-action="translate-neg-X">D</div>
+                        </div>
                     </div>
-                    <div class="control-row">
-                        <div class="control-item" data-action="translate-pos-X">A</div>
-                        <div class="control-item" data-action="translate-pos-Z">S</div>
-                        <div class="control-item" data-action="translate-neg-X">D</div>
-                    </div>
-                </div>
-                <div class="control-col">
-                    <div class="control-row">
-                        <div class="control-item" data-action="translate-pos-Y">Q</div>
-                    </div>
-                    <div class="control-row">
-                        <div class="control-item" data-action="translate-neg-Y">E</div>
+                    <div class="control-col">
+                        <div class="control-row">
+                            <div class="control-item" data-action="translate-pos-Y">Q</div>
+                        </div>
+                        <div class="control-row">
+                            <div class="control-item" data-action="translate-neg-Y">E</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="control-wrapper control-wrapper-rotate">
-            <label for="rotate-value" class="control-title">Rotate</label>
-            <input type="text" class="transformation-value" id="rotate-value">
-            <div class="error">Invalid value</div>
-            <div class="control-container">
-                <div class="control-col">
-                    <div class="control-row">
-                        <div class="control-item" data-action="rotate-neg-X">↑</div>
+            <button class="minimize-btn" type="button">-</button>
+            <div class="control-content">
+                <label for="rotate-value" class="control-title">Rotate</label>
+                <input type="text" class="transformation-value" id="rotate-value">
+                <div class="error">Invalid value</div>
+                <div class="control-container">
+                    <div class="control-col">
+                        <div class="control-row">
+                            <div class="control-item" data-action="rotate-neg-X">↑</div>
+                        </div>
+                        <div class="control-row">
+                            <div class="control-item" data-action="rotate-pos-Y">←</div>
+                            <div class="control-item" data-action="rotate-pos-X">↓</div>
+                            <div class="control-item" data-action="rotate-neg-Y">→</div>
+                        </div>
                     </div>
-                    <div class="control-row">
-                        <div class="control-item" data-action="rotate-pos-Y">←</div>
-                        <div class="control-item" data-action="rotate-pos-X">↓</div>
-                        <div class="control-item" data-action="rotate-neg-Y">→</div>
-                    </div>
-                </div>
-                <div class="control-col">
-                    <div class="control-row">
-                        <div class="control-item" data-action="rotate-neg-Z">C</div>
-                    </div>
-                    <div class="control-row">
-                        <div class="control-item" data-action="rotate-pos-Z">V</div>
+                    <div class="control-col">
+                        <div class="control-row">
+                            <div class="control-item" data-action="rotate-neg-Z">C</div>
+                        </div>
+                        <div class="control-row">
+                            <div class="control-item" data-action="rotate-pos-Z">V</div>
+                        </div>
                     </div>
                 </div>
             </div>

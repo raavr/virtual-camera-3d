@@ -101,42 +101,61 @@ export class App {
         }
     }
 
-    bindVirtualKeys() {
-        let onVirtualKeyClick = (ev) => {
-            if(!ev.target.classList.contains("control-item")) {
-                return;
-            }
+    onVirtualKeyClick(elem) {
 
-            let domAction = ev.target.getAttribute("data-action").split("-"),
-                action = domAction[0],
-                sign = domAction[1],
-                axis = domAction[2];
-            
-            let getAxis = () => {
-                return axis === "X" ? AXIS.X : (axis === "Y" ? AXIS.Y : AXIS.Z);
-            }
-
-            let getRotateValue = () => {
-                return sign === "pos" ? values.rotate : -values.rotate;
-            }
-
-            let getTranslateValue = () => {
-                return sign === "pos" ? values.translate : -values.translate;
-            }
-            
-            switch(action) {
-                case "rotate":
-                    this.transformation.rotate(getAxis(), getRotateValue());
-                    break;
-                case "translate":
-                    this.transformation.translate(getAxis(), getTranslateValue());
-                    break;
-            }
-
-            this.run();
+        let domAction = elem.getAttribute("data-action").split("-"),
+            action = domAction[0],
+            sign = domAction[1],
+            axis = domAction[2];
+        
+        let getAxis = () => {
+            return axis === "X" ? AXIS.X : (axis === "Y" ? AXIS.Y : AXIS.Z);
         }
 
-        document.addEventListener("click", onVirtualKeyClick, false);
+        let getRotateValue = () => {
+            return sign === "pos" ? values.rotate : -values.rotate;
+        }
+
+        let getTranslateValue = () => {
+            return sign === "pos" ? values.translate : -values.translate;
+        }
+        
+        switch(action) {
+            case "rotate":
+                this.transformation.rotate(getAxis(), getRotateValue());
+                break;
+            case "translate":
+                this.transformation.translate(getAxis(), getTranslateValue());
+                break;
+        }
+
+        this.run();
+    }
+
+    onMinBtnClick(elem) {
+        let content = elem.parentNode.children[1];
+        let isShowed = elem.textContent === "-";
+        if(isShowed) {
+                content.style.display = "none";
+                elem.textContent = "+";
+        } else {
+                content.style.display = "block";
+                elem.textContent = "-";
+        }
+    }
+
+    bindControlElems() {
+
+        let onControlElemClick = (ev) => {
+            let elem = ev.target;
+            if(elem.classList.contains("control-item")) {
+                this.onVirtualKeyClick(elem);
+            } else if(elem.classList.contains("minimize-btn")) {
+                this.onMinBtnClick(elem);
+            } 
+        }
+
+        document.addEventListener("click", onControlElemClick, false);
     }
 
     setCanvas() {
@@ -146,7 +165,7 @@ export class App {
 
     bindEvents() {
         this.bindKeys();
-        this.bindVirtualKeys();
+        this.bindControlElems();
         this.bindResize();
         this.bindInputs();
     } 
