@@ -31,7 +31,7 @@ export class Scene {
     paint() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.scenesObjects.triangles2D.forEach((t) => {
-            this.ctx.fillStyle = '#f00';
+            this.ctx.fillStyle = 'rgb(16,108,200)';
             this.ctx.strokeStyle = '#000';
             this.ctx.beginPath();
             this.ctx.moveTo(Math.round(t.a.x), Math.round(t.a.y));
