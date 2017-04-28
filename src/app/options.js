@@ -1,2 +1,1 @@
-export let translateValue = 300;
-export let rotateValue = 0.1;
+export let values = { translate: 300, rotate: 0.1 };
