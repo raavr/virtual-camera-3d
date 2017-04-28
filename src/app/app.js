@@ -101,6 +101,40 @@ export class App {
         }
     }
 
+    bindVirtualKeys() {
+        let onVirtualKeyClick = (ev) => {
+            let domAction = ev.target.getAttribute("data-action").split("-"),
+                action = domAction[0],
+                sign = domAction[1],
+                axis = domAction[2];
+            
+            let getAxis = () => {
+                return axis === "X" ? AXIS.X : (axis === "Y" ? AXIS.Y : AXIS.Z);
+            }
+
+            let getRotateValue = () => {
+                return sign === "pos" ? values.rotate : -values.rotate;
+            }
+
+            let getTranslateValue = () => {
+                return sign === "pos" ? values.translate : -values.translate;
+            }
+            
+            switch(action) {
+                case "rotate":
+                    this.transformation.rotate(getAxis(), getRotateValue());
+                    break;
+                case "translate":
+                    this.transformation.translate(getAxis(), getTranslateValue());
+                    break;
+            }
+
+            this.run();
+        }
+
+        document.addEventListener("click", onVirtualKeyClick, false);
+    }
+
     setCanvas() {
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
@@ -108,6 +142,7 @@ export class App {
 
     bindEvents() {
         this.bindKeys();
+        this.bindVirtualKeys();
         this.bindResize();
         this.bindInputs();
     } 
