@@ -58,6 +58,10 @@ export function isVisible(point) {
     return point.z >= 0; 
 }
 
+export function isNumeric(n) {
+    return !isNaN(+n) && isFinite(n);
+}
+
 //from underscore.js
 export function debounce(func, wait, immediate) {
 	var timeout;

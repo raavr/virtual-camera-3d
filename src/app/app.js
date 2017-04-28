@@ -6,7 +6,7 @@ import { Scene } from './scene';
 import { Transformation } from './scenes-transformation';
 import { values } from './options';
 import { PaintersAlgorithm } from './painters-algorithm';
-import { debounce } from './utils';
+import { debounce, isNumeric } from './utils';
 
 export class App {
 
@@ -21,6 +21,10 @@ export class App {
 
     bindKeys() {
         document.addEventListener("keydown", (ev) => {
+            if(ev.target.classList.contains("transformation-value")) {
+                return;
+            }
+
             switch(ev.keyCode) {
                 case 37: //left
                     this.transformation.rotate(AXIS.Y, values.rotate);
@@ -64,6 +68,39 @@ export class App {
         }, false);
     }
 
+    bindInputs() {
+        let inputs = document.querySelectorAll(".transformation-value"),
+            validateInput = (ev) => {
+
+                let elem = ev.target,
+                    toggleError = () => {
+                        let errorEl = elem.parentNode.children[2];
+                        errorEl.style.display = isNumeric(elem.value) ? "none" : "block";
+                    };
+                
+                if(isNumeric(elem.value)) {
+                    this.updateValues(elem.id, +elem.value);
+                }
+
+                toggleError();
+            };
+
+        [].forEach.call(inputs, (input) => { 
+            input.addEventListener("keyup", validateInput, false); 
+        });
+    }
+
+    updateValues(idElem, value) {
+        switch(idElem) {
+            case "translate-value":
+                values.translate = value;
+                break;
+            case "rotate-value":
+                values.rotate = value;
+                break;
+        }
+    }
+
     setCanvas() {
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
@@ -72,6 +109,7 @@ export class App {
     bindEvents() {
         this.bindKeys();
         this.bindResize();
+        this.bindInputs();
     } 
 
     bindResize() {
@@ -85,8 +123,14 @@ export class App {
 
     }
 
+    setInputsValues() {
+        document.querySelector("#translate-value").value = values.translate;
+        document.querySelector("#rotate-value").value = values.rotate;
+    }
+
     init() {
         this.setCanvas();
+        this.setInputsValues();
         this.bindEvents();
         this.run();    
     }
