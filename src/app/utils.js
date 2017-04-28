@@ -54,6 +54,10 @@ export function createVector(point3D) {
     return [point3D.x, point3D.y, point3D.z, 1.0];
 }
 
+export function isVisible(point) {
+    return point.z >= 0; 
+}
+
 //from underscore.js
 export function debounce(func, wait, immediate) {
 	var timeout;

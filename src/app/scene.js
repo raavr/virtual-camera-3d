@@ -1,6 +1,7 @@
 import { FocalLength } from './consts';
 import { Point2D } from './point2D';
 import { Triangle } from './triangle';
+import { isVisible } from './utils';
 
 export class Scene {
 
@@ -21,7 +22,9 @@ export class Scene {
 
     make2DProjecton() {
         this.scenesObjects.sortedTriangles.forEach((t) => {
-            this.scenesObjects.add2DTriangle(new Triangle(this.to2DPoint(t.a), this.to2DPoint(t.b), this.to2DPoint(t.c)));
+            if(isVisible(t.a) && isVisible(t.b) && isVisible(t.c)) {
+                this.scenesObjects.add2DTriangle(new Triangle(this.to2DPoint(t.a), this.to2DPoint(t.b), this.to2DPoint(t.c)));
+            }
         });
     }
 
