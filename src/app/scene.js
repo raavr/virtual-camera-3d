@@ -20,7 +20,7 @@ export class Scene {
         return new Point2D(x,y);
     }
 
-    make2DProjecton() {
+    make2DProjection() {
         this.scenesObjects.sortedTriangles.forEach((t) => {
             if(isVisible(t.a) && isVisible(t.b) && isVisible(t.c)) {
                 this.scenesObjects.add2DTriangle(new Triangle(this.to2DPoint(t.a), this.to2DPoint(t.b), this.to2DPoint(t.c)));

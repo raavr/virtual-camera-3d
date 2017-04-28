@@ -213,7 +213,7 @@ export class App {
 
     run() {
         this.alg.compute();
-        this.scene.make2DProjecton();
+        this.scene.make2DProjection();
         this.scene.paint();
     }
 }
