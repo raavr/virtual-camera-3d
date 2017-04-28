@@ -1,10 +1,14 @@
 export const ROUND_PRECISION = 100000;
-export const FocalLength = 300;
 
 export const AXIS = {
     X: 0,
     Y: 1,
     Z: 2
+}
+
+export const ZOOM = {
+    IN: 0,
+    OUT: 1
 }
 
 export const POINTS_3D = [

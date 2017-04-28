@@ -1,7 +1,7 @@
 'use strict';
 import './app.style.scss';
 import { ScenesObjects } from './scenes-objects';
-import { POINTS_3D, AXIS } from './consts';
+import { POINTS_3D, AXIS, ZOOM } from './consts';
 import { Scene } from './scene';
 import { Transformation } from './scenes-transformation';
 import { values } from './options';
@@ -62,7 +62,14 @@ export class App {
                 case 68: //d
                     this.transformation.translate(AXIS.X, -values.translate);
                     break;
+                case 109: //-
+                    this.transformation.zoom(ZOOM.OUT, values.zoom);
+                    break;
+                case 107: //+
+                    this.transformation.zoom(ZOOM.IN, values.zoom);
+                    break;
             }
+            
             this.run();
 
         }, false);
@@ -98,6 +105,9 @@ export class App {
             case "rotate-value":
                 values.rotate = value;
                 break;
+            case "zoom-value":
+                values.zoom = value;
+                break;
         }
     }
 
@@ -119,6 +129,10 @@ export class App {
         let getTranslateValue = () => {
             return sign === "pos" ? values.translate : -values.translate;
         }
+
+        let getZoomSign = () => {
+            return sign === "in" ? ZOOM.IN : ZOOM.OUT;
+        }
         
         switch(action) {
             case "rotate":
@@ -126,6 +140,9 @@ export class App {
                 break;
             case "translate":
                 this.transformation.translate(getAxis(), getTranslateValue());
+                break;
+            case "zoom":
+                this.transformation.zoom(getZoomSign(), values.zoom);
                 break;
         }
 
@@ -184,6 +201,7 @@ export class App {
     setInputsValues() {
         document.querySelector("#translate-value").value = values.translate;
         document.querySelector("#rotate-value").value = values.rotate;
+        document.querySelector("#zoom-value").value = values.zoom;
     }
 
     init() {

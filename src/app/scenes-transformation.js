@@ -1,5 +1,6 @@
 import { TransformationMatrix } from './transformation-matrix';
-import { FocalLength, AXIS } from './consts';
+import { AXIS, ZOOM } from './consts';
+import { focalLength } from './options';
 import { multiplyMatrixByVector, createVector } from './utils';
 
 export class Transformation {
@@ -56,6 +57,23 @@ export class Transformation {
             case AXIS.Z:
                 matrix = this.matrix.getTransMatrix(0, 0, value);
                 this.updateTriangles(matrix);
+                break;
+        }
+    }
+
+    zoom(sign, value) {
+        switch(sign) {
+            case ZOOM.IN:
+                focalLength.value += value;
+                focalLength.zoomOut = true;
+                break;
+            case ZOOM.OUT:
+                let tmpFocalLength = focalLength.value - value;
+                if(tmpFocalLength < 0) {
+                    focalLength.zoomOut = false;
+                } else {
+                    focalLength.value = tmpFocalLength;
+                }
                 break;
         }
     }

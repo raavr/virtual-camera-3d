@@ -1,4 +1,4 @@
-import { FocalLength } from './consts';
+import { focalLength } from './options';
 import { Point2D } from './point2D';
 import { Triangle } from './triangle';
 import { isVisible } from './utils';
@@ -13,7 +13,7 @@ export class Scene {
 
     to2DPoint(point3D) {
 
-        let tmp = FocalLength/ point3D.z;
+        let tmp = focalLength.value / point3D.z;
         let x = tmp*point3D.x + this.canvas.width/2;
         let y =  this.canvas.height/2 - tmp*point3D.y;
 
