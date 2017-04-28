@@ -6,6 +6,7 @@ import { Scene } from './scene';
 import { Transformation } from './scenes-transformation';
 import { values } from './options';
 import { PaintersAlgorithm } from './painters-algorithm';
+import { debounce } from './utils';
 
 export class App {
 
@@ -80,7 +81,7 @@ export class App {
             this.run();
         };
 
-        window.addEventListener("resize", resize);
+        window.addEventListener("resize", debounce(resize, 250));
 
     }
 
