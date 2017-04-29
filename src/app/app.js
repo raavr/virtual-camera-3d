@@ -78,7 +78,6 @@ export class App {
     bindInputs() {
         let inputs = document.querySelectorAll(".transformation-value"),
             validateInput = (ev) => {
-
                 let elem = ev.target,
                     toggleError = () => {
                         let errorEl = elem.parentNode.children[2];
@@ -93,7 +92,7 @@ export class App {
             };
 
         [].forEach.call(inputs, (input) => { 
-            input.addEventListener("keyup", validateInput, false); 
+            input.addEventListener("keyup", debounce(validateInput, 350), false); 
         });
     }
 
