@@ -26,17 +26,10 @@ export function computeNormalVector(point) {
 }
 
 export function getPointPositionRelativeToPlane(triangle, point) {
+    const normalVect = computeNormalVector(computeVectorProduct(triangle));
     return Math.round(
-            computeScalarProduct(
-                computeNormalVector(computeVectorProduct(triangle)), 
-                point
-            )
-            - 
-            computeScalarProduct(
-                computeNormalVector(computeVectorProduct(triangle)), 
-                triangle.a
-            )
-        );
+            computeScalarProduct(normalVect, point) - computeScalarProduct(normalVect, triangle.a)
+           );
 }
 
 export function multiplyMatrixByVector(matrix, vector) {
