@@ -19,8 +19,14 @@ body {
   padding: 10px;
   background-color: rgba(0,0,0,0.1);
   position: fixed;
-  
+  max-width: 150px;
 
+  @media (min-width: 576px) {
+    & {
+      max-width: none;
+    }
+  }
+  
   &.control-wrapper-translate {
     bottom: 10px;
     left: 10px;
@@ -88,9 +94,27 @@ body {
   display: flex;
   margin-top: 10px;
   justify-content: center;
+  flex-direction: column;
+
+  @media (min-width: 576px) {
+    & {
+      flex-direction: row;
+    }
+  } 
 
   .control-col:last-child {
-    margin-left: 10px;
+    margin-top: 10px;
+    margin-left: 0;
+    display: flex;
+    justify-content: center;
+
+    @media (min-width: 576px) {
+      & {
+        display: block;
+        margin-top: 0;
+        margin-left: 10px;
+      }
+    } 
   }
 
   .control-row {
@@ -99,12 +123,12 @@ body {
   }
 
   .control-item {
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
     border: 1px solid rgba(0,0,0,0.4);
     text-align: center;
-    line-height: 50px;
-    margin: 5px;
+    line-height: 32px;
+    margin: 4px;
     background-color: rgba(0,0,0,0.2);
     border-radius: 3px;
     box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 
@@ -112,6 +136,15 @@ body {
                 0 1px 5px 0 rgba(0,0,0,.12);
     cursor: pointer;
     transition: all 0.1s ease-in-out;
+
+    @media (min-width: 576px) {
+      & {
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        margin: 5px;
+      }
+    }  
 
     &:hover {
       background-color: rgba(0,0,0,0.1);
