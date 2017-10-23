@@ -33,7 +33,7 @@ export function getPointPositionRelativeToPlane(triangle, point) {
 }
 
 export function multiplyMatrixByVector(matrix, vector) {
-    const finalVector = [0,0,0,0];
+    const finalVector = Array.from({length: 4}, () => 0);
     for (let i = 0; i < 4; i++) {
         for (let j = 0; j < 4; j++) {
             finalVector[i] += matrix[i][j] * vector[j];
