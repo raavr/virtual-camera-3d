@@ -9,7 +9,7 @@ const DEFAULT_MATRIX = [
 export class TransformationMatrix {
     
     getTransMatrix(x, y, z) {
-        let matrixTrans = DEFAULT_MATRIX.map((arr) => arr.slice(0));
+        const matrixTrans = DEFAULT_MATRIX.map((arr) => arr.slice(0));
         
         matrixTrans[0][3] = x;
         matrixTrans[1][3] = y;
@@ -19,7 +19,7 @@ export class TransformationMatrix {
     }
 
     getRotXMatrix(alpha) {
-        let matrixRotX = DEFAULT_MATRIX.map((arr) => arr.slice(0));
+        const matrixRotX = DEFAULT_MATRIX.map((arr) => arr.slice(0));
         
         matrixRotX[1][1] = Math.cos(alpha);
         matrixRotX[1][2] = -Math.sin(alpha);
@@ -30,7 +30,7 @@ export class TransformationMatrix {
     }
 
     getRotYMatrix(alpha) {
-        let matrixRotY = DEFAULT_MATRIX.map((arr) => arr.slice(0));
+        const matrixRotY = DEFAULT_MATRIX.map((arr) => arr.slice(0));
 
         matrixRotY[0][0] = Math.cos(alpha);
         matrixRotY[0][2] = Math.sin(alpha);
@@ -41,7 +41,7 @@ export class TransformationMatrix {
     }
 
    getRotZMatrix(alpha) {
-        let matrixRotZ = DEFAULT_MATRIX.map((arr) => arr.slice(0));
+        const matrixRotZ = DEFAULT_MATRIX.map((arr) => arr.slice(0));
         
         matrixRotZ[0][0] = Math.cos(alpha);
         matrixRotZ[0][1] = -Math.sin(alpha);

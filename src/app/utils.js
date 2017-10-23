@@ -1,6 +1,6 @@
 import { Point3D } from './point3D';
 
-//http://kb.komires.net/article.php?id=2
+//based on http://kb.komires.net/article.php?id=2
 export function computeVectorProduct(triangle) {
     let x1 = triangle.b.x - triangle.a.x;
     let y1 = triangle.b.y - triangle.a.y;
@@ -33,7 +33,7 @@ export function getPointPositionRelativeToPlane(triangle, point) {
 }
 
 export function multiplyMatrixByVector(matrix, vector) {
-    let finalVector = [0,0,0,0];
+    const finalVector = [0,0,0,0];
     for (let i = 0; i < 4; i++) {
         for (let j = 0; j < 4; j++) {
             finalVector[i] += matrix[i][j] * vector[j];

@@ -11,8 +11,8 @@ export class PaintersAlgorithm {
     compute() {
 
         this.scenesObjects.clear();       
-        let bspTree = new BSPTree();
-        let root = new Node(this.scenesObjects.triangles3D[0]);
+        const bspTree = new BSPTree(), 
+              root = new Node(this.scenesObjects.triangles3D[0]);
 
         for (let i = 1; i < this.scenesObjects.triangles3D.length; i++) {
             bspTree.add(root, this.scenesObjects.triangles3D[i]);
