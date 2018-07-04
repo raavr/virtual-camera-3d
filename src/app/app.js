@@ -11,7 +11,7 @@ import { debounce, isNumeric } from './utils';
 export class App {
 
     constructor() {
-        let objs = new ScenesObjects(POINTS_3D);
+        const objs = new ScenesObjects(POINTS_3D);
 
         this.alg = new PaintersAlgorithm(objs);
         this.transformation = new Transformation(objs);
@@ -21,11 +21,11 @@ export class App {
 
     bindKeys() {
         document.addEventListener("keydown", (ev) => {
-            if(ev.target.classList.contains("transformation-value")) {
+            if (ev.target.classList.contains("transformation-value")) {
                 return;
             }
 
-            switch(ev.keyCode) {
+            switch (ev.keyCode) {
                 case 37: //left
                     this.transformation.rotate(AXIS.Y, values.rotate);
                     break;
@@ -40,13 +40,13 @@ export class App {
                     break;
                 case 86: //v
                     this.transformation.rotate(AXIS.Z, -values.rotate);
-                    break;            
+                    break;
                 case 67: //c           
                     this.transformation.rotate(AXIS.Z, values.rotate);
                     break;
                 case 81: //q
                     this.transformation.translate(AXIS.Y, -values.translate);
-                    break;                 
+                    break;
                 case 69: //e
                     this.transformation.translate(AXIS.Y, values.translate);
                     break;
@@ -55,7 +55,7 @@ export class App {
                     break;
                 case 83: //s
                     this.transformation.translate(AXIS.Z, values.translate);
-                    break;              
+                    break;
                 case 65: //a
                     this.transformation.translate(AXIS.X, values.translate);
                     break;
@@ -69,35 +69,35 @@ export class App {
                     this.transformation.zoom(ZOOM.IN, values.zoom);
                     break;
             }
-            
+
             this.run();
 
         }, false);
     }
 
     bindInputs() {
-        let inputs = document.querySelectorAll(".transformation-value"),
-            validateInput = (ev) => {
-                let elem = ev.target,
-                    toggleError = () => {
-                        let errorEl = elem.parentNode.children[2];
-                        errorEl.style.display = isNumeric(elem.value) ? "none" : "block";
-                    };
-                
-                if(isNumeric(elem.value)) {
-                    this.updateValues(elem.id, +elem.value);
-                }
-
-                toggleError();
+        const inputs = document.querySelectorAll(".transformation-value");
+        const validateInput = (ev) => {
+            const elem = ev.target;
+            const toggleError = () => {
+                const errorEl = elem.parentNode.children[2];
+                errorEl.style.display = isNumeric(elem.value) ? "none" : "block";
             };
 
-        [].forEach.call(inputs, (input) => { 
-            input.addEventListener("keyup", debounce(validateInput, 350), false); 
+            if (isNumeric(elem.value)) {
+                this.updateValues(elem.id, +elem.value);
+            }
+
+            toggleError();
+        };
+
+        [].forEach.call(inputs, (input) => {
+            input.addEventListener("keyup", debounce(validateInput, 350), false);
         });
     }
 
     updateValues(idElem, value) {
-        switch(idElem) {
+        switch (idElem) {
             case "translate-value":
                 values.translate = value;
                 break;
@@ -112,28 +112,28 @@ export class App {
 
     onVirtualKeyClick(elem) {
 
-        let domAction = elem.getAttribute("data-action").split("-"),
-            action = domAction[0],
-            sign = domAction[1],
-            axis = domAction[2];
-        
-        let getAxis = () => {
+        const domAction = elem.getAttribute("data-action").split("-");
+        const action = domAction[0];
+        const sign = domAction[1];
+        const axis = domAction[2];
+
+        const getAxis = () => {
             return axis === "X" ? AXIS.X : (axis === "Y" ? AXIS.Y : AXIS.Z);
         }
 
-        let getRotateValue = () => {
+        const getRotateValue = () => {
             return sign === "pos" ? values.rotate : -values.rotate;
         }
 
-        let getTranslateValue = () => {
+        const getTranslateValue = () => {
             return sign === "pos" ? values.translate : -values.translate;
         }
 
-        let getZoomSign = () => {
+        const getZoomSign = () => {
             return sign === "in" ? ZOOM.IN : ZOOM.OUT;
         }
-        
-        switch(action) {
+
+        switch (action) {
             case "rotate":
                 this.transformation.rotate(getAxis(), getRotateValue());
                 break;
@@ -149,26 +149,26 @@ export class App {
     }
 
     onMinBtnClick(elem) {
-        let content = elem.parentNode.children[1];
-        let isShowed = elem.textContent === "-";
-        if(isShowed) {
-                content.style.display = "none";
-                elem.textContent = "+";
+        const content = elem.parentNode.children[1];
+        const isShowed = elem.textContent === "-";
+        if (isShowed) {
+            content.style.display = "none";
+            elem.textContent = "+";
         } else {
-                content.style.display = "block";
-                elem.textContent = "-";
+            content.style.display = "block";
+            elem.textContent = "-";
         }
     }
 
     bindControlElems() {
 
-        let onControlElemClick = (ev) => {
-            let elem = ev.target;
-            if(elem.classList.contains("control-item")) {
+        const onControlElemClick = (ev) => {
+            const elem = ev.target;
+            if (elem.classList.contains("control-item")) {
                 this.onVirtualKeyClick(elem);
-            } else if(elem.classList.contains("minimize-btn")) {
+            } else if (elem.classList.contains("minimize-btn")) {
                 this.onMinBtnClick(elem);
-            } 
+            }
         }
 
         document.addEventListener("click", onControlElemClick, false);
@@ -184,11 +184,11 @@ export class App {
         this.bindControlElems();
         this.bindResize();
         this.bindInputs();
-    } 
+    }
 
     bindResize() {
 
-        let resize = () => {
+        const resize = () => {
             this.setCanvas();
             this.run();
         };
@@ -207,7 +207,7 @@ export class App {
         this.setCanvas();
         this.setInputsValues();
         this.bindEvents();
-        this.run();    
+        this.run();
     }
 
     run() {

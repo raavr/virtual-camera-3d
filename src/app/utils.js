@@ -2,13 +2,13 @@ import { Point3D } from './point3D';
 
 //based on http://kb.komires.net/article.php?id=2
 export function computeVectorProduct(triangle) {
-    let x1 = triangle.b.x - triangle.a.x;
-    let y1 = triangle.b.y - triangle.a.y;
-    let z1 = triangle.b.z - triangle.a.z;
+    const x1 = triangle.b.x - triangle.a.x;
+    const y1 = triangle.b.y - triangle.a.y;
+    const z1 = triangle.b.z - triangle.a.z;
 
-    let x2 = triangle.c.x - triangle.a.x;
-    let y2 = triangle.c.y - triangle.a.y;
-    let z2 = triangle.c.z - triangle.a.z;
+    const x2 = triangle.c.x - triangle.a.x;
+    const y2 = triangle.c.y - triangle.a.y;
+    const z2 = triangle.c.z - triangle.a.z;
 
     return new Point3D(y1 * z2 - z1 * y2, z1 * x2 - x1 * z2, x1 * y2 - y1 * x2);
 }

@@ -20,9 +20,7 @@
     "es6"
   ],
   "homepage": "",
-  "dependencies": {
-
-  },
+  "dependencies": {},
   "devDependencies": {
     "autoprefixer": "^6.0.3",
     "babel-core": "^6.2.1",

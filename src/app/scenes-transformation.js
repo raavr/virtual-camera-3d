@@ -11,10 +11,10 @@ export class Transformation {
     }
 
     updateTriangles(matrix) {
-        this.scenesObjects.triangles3D.forEach((triangle) => {     
+        this.scenesObjects.triangles3D.forEach((triangle) => {
             let finalVector = multiplyMatrixByVector(matrix, createVector(triangle.a));
             triangle.a.updatePoint(finalVector);
-            
+
             finalVector = multiplyMatrixByVector(matrix, createVector(triangle.b));
             triangle.b.updatePoint(finalVector);
 
@@ -25,27 +25,27 @@ export class Transformation {
 
     rotate(axis, value) {
         let matrix;
-        
-        switch(axis) {
-            case AXIS.X: 
+
+        switch (axis) {
+            case AXIS.X:
                 matrix = this.matrix.getRotXMatrix(value);
                 this.updateTriangles(matrix);
-                break;   
-            case AXIS.Y: 
+                break;
+            case AXIS.Y:
                 matrix = this.matrix.getRotYMatrix(value);
                 this.updateTriangles(matrix);
                 break;
-            case AXIS.Z: 
+            case AXIS.Z:
                 matrix = this.matrix.getRotZMatrix(value);
                 this.updateTriangles(matrix);
                 break;
-            
+
         }
     }
 
     translate(axis, value) {
         let matrix;
-        switch(axis) {
+        switch (axis) {
             case AXIS.X:
                 matrix = this.matrix.getTransMatrix(value, 0, 0);
                 this.updateTriangles(matrix);
@@ -62,14 +62,14 @@ export class Transformation {
     }
 
     zoom(sign, value) {
-        switch(sign) {
+        switch (sign) {
             case ZOOM.IN:
                 focalLength.value += value;
                 focalLength.zoomOut = true;
                 break;
             case ZOOM.OUT:
-                let tmpFocalLength = focalLength.value - value;
-                if(tmpFocalLength < 0) {
+                const tmpFocalLength = focalLength.value - value;
+                if (tmpFocalLength < 0) {
                     focalLength.zoomOut = false;
                 } else {
                     focalLength.value = tmpFocalLength;
