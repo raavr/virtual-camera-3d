@@ -1,11 +1,11 @@
 import { App } from './app/app';
 
 function bootstrapProduction() {
-    document.addEventListener("DOMContentLoaded", bootstrap);
+  document.addEventListener("DOMContentLoaded", bootstrap);
 }
 
 export default function bootstrap() {
-    (new App()).init();
+  (new App()).init();
 }
 
 bootstrap();

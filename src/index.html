@@ -1,87 +1,87 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <base href="/">
-    	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    	<meta name="description" content="Virtual Camera 3D">
-    	<meta name="author" content="Rafał Rykowski">
-        <meta charset="utf-8">
-        <title>Virtual Camera</title>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-    </head>
-    <body>
-        <canvas></canvas>
-        <div class="control-wrapper control-wrapper-translate">
-            <button class="minimize-btn" type="button">-</button>
-            <div class="control-content">
-                <label for="translate-value" class="control-title">Translate</label>
-                <input type="text" class="transformation-value" id="translate-value">
-                <div class="error">Invalid value</div>
-                <div class="control-container">
-                    <div class="control-col">
-                        <div class="control-row">
-                            <div class="control-item" data-action="translate-neg-Z">W</div>
-                        </div>
-                        <div class="control-row">
-                            <div class="control-item" data-action="translate-pos-X">A</div>
-                            <div class="control-item" data-action="translate-pos-Z">S</div>
-                            <div class="control-item" data-action="translate-neg-X">D</div>
-                        </div>
-                    </div>
-                    <div class="control-col">
-                        <div class="control-row">
-                            <div class="control-item" data-action="translate-pos-Y">Q</div>
-                        </div>
-                        <div class="control-row">
-                            <div class="control-item" data-action="translate-neg-Y">E</div>
-                        </div>
-                    </div>
-                </div>
+  <head>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="Virtual Camera 3D">
+    <meta name="author" content="Rafał Rykowski">
+    <meta charset="utf-8">
+    <title>Virtual Camera</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+  </head>
+  <body>
+    <canvas></canvas>
+    <div class="control-wrapper control-wrapper-translate">
+      <button class="minimize-btn" type="button">-</button>
+      <div class="control-content">
+        <label for="translate-value" class="control-title">Translate</label>
+        <input type="text" class="transformation-value" id="translate-value">
+        <div class="error">Invalid value</div>
+        <div class="control-container">
+          <div class="control-col">
+            <div class="control-row">
+              <div class="control-item" data-action="translate-neg-Z">W</div>
             </div>
-        </div>
-        <div class="control-wrapper control-wrapper-rotate">
-            <button class="minimize-btn" type="button">-</button>
-            <div class="control-content">
-                <label for="rotate-value" class="control-title">Rotate</label>
-                <input type="text" class="transformation-value" id="rotate-value">
-                <div class="error">Invalid value</div>
-                <div class="control-container">
-                    <div class="control-col">
-                        <div class="control-row">
-                            <div class="control-item" data-action="rotate-neg-X">↑</div>
-                        </div>
-                        <div class="control-row">
-                            <div class="control-item" data-action="rotate-pos-Y">←</div>
-                            <div class="control-item" data-action="rotate-pos-X">↓</div>
-                            <div class="control-item" data-action="rotate-neg-Y">→</div>
-                        </div>
-                    </div>
-                    <div class="control-col">
-                        <div class="control-row">
-                            <div class="control-item" data-action="rotate-neg-Z">C</div>
-                        </div>
-                        <div class="control-row">
-                            <div class="control-item" data-action="rotate-pos-Z">V</div>
-                        </div>
-                    </div>
-                </div>
+            <div class="control-row">
+              <div class="control-item" data-action="translate-pos-X">A</div>
+              <div class="control-item" data-action="translate-pos-Z">S</div>
+              <div class="control-item" data-action="translate-neg-X">D</div>
             </div>
-        </div>
-        <div class="control-wrapper control-wrapper-zoom">
-            <button class="minimize-btn" type="button">-</button>
-            <div class="control-content">
-                <label for="zoom-value" class="control-title">Zoom</label>
-                <input type="text" class="transformation-value" id="zoom-value">
-                <div class="error">Invalid value</div>
-                <div class="control-container">
-                    <div class="control-col">
-                        <div class="control-row">
-                            <div class="control-item" data-action="zoom-out">-</div>
-                            <div class="control-item" data-action="zoom-in">+</div>
-                        </div>
-                    </div>
-                </div>
+          </div>
+          <div class="control-col">
+            <div class="control-row">
+              <div class="control-item" data-action="translate-pos-Y">Q</div>
             </div>
+            <div class="control-row">
+              <div class="control-item" data-action="translate-neg-Y">E</div>
+            </div>
+          </div>
         </div>
-    </body>
+      </div>
+    </div>
+    <div class="control-wrapper control-wrapper-rotate">
+      <button class="minimize-btn" type="button">-</button>
+      <div class="control-content">
+        <label for="rotate-value" class="control-title">Rotate</label>
+        <input type="text" class="transformation-value" id="rotate-value">
+        <div class="error">Invalid value</div>
+        <div class="control-container">
+          <div class="control-col">
+            <div class="control-row">
+              <div class="control-item" data-action="rotate-neg-X">↑</div>
+            </div>
+            <div class="control-row">
+              <div class="control-item" data-action="rotate-pos-Y">←</div>
+              <div class="control-item" data-action="rotate-pos-X">↓</div>
+              <div class="control-item" data-action="rotate-neg-Y">→</div>
+            </div>
+          </div>
+          <div class="control-col">
+            <div class="control-row">
+              <div class="control-item" data-action="rotate-neg-Z">C</div>
+            </div>
+            <div class="control-row">
+              <div class="control-item" data-action="rotate-pos-Z">V</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="control-wrapper control-wrapper-zoom">
+      <button class="minimize-btn" type="button">-</button>
+      <div class="control-content">
+        <label for="zoom-value" class="control-title">Zoom</label>
+        <input type="text" class="transformation-value" id="zoom-value">
+        <div class="error">Invalid value</div>
+        <div class="control-container">
+          <div class="control-col">
+            <div class="control-row">
+              <div class="control-item" data-action="zoom-out">-</div>
+              <div class="control-item" data-action="zoom-in">+</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
