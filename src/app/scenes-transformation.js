@@ -7,67 +7,59 @@ export class Transformation {
 
     constructor(scenesObjects) {
         this.scenesObjects = scenesObjects;
-        this.matrix = new TransformationMatrix();
     }
 
     updateTriangles(matrix) {
         this.scenesObjects.triangles3D.forEach((triangle) => {
-            let finalVector = multiplyMatrixByVector(matrix, createVector(triangle.a));
-            triangle.a.updatePoint(finalVector);
-
-            finalVector = multiplyMatrixByVector(matrix, createVector(triangle.b));
-            triangle.b.updatePoint(finalVector);
-
-            finalVector = multiplyMatrixByVector(matrix, createVector(triangle.c));
-            triangle.c.updatePoint(finalVector);
+            Object.keys(triangle).forEach((point) => {
+                const finalVector = multiplyMatrixByVector(matrix, createVector(triangle[point]));
+                triangle[point].updatePoint(finalVector);
+            });
         })
     }
 
     rotate(axis, value) {
         let matrix;
-
         switch (axis) {
             case AXIS.X:
-                matrix = this.matrix.getRotXMatrix(value);
-                this.updateTriangles(matrix);
+                matrix = TransformationMatrix.getRotXMatrix(value);
                 break;
             case AXIS.Y:
-                matrix = this.matrix.getRotYMatrix(value);
-                this.updateTriangles(matrix);
+                matrix = TransformationMatrix.getRotYMatrix(value);
                 break;
             case AXIS.Z:
-                matrix = this.matrix.getRotZMatrix(value);
-                this.updateTriangles(matrix);
+                matrix = TransformationMatrix.getRotZMatrix(value);
                 break;
-
         }
+
+        this.updateTriangles(matrix);
     }
 
     translate(axis, value) {
         let matrix;
         switch (axis) {
             case AXIS.X:
-                matrix = this.matrix.getTransMatrix(value, 0, 0);
-                this.updateTriangles(matrix);
+                matrix = TransformationMatrix.getTransMatrix(value, 0, 0);
                 break;
             case AXIS.Y:
-                matrix = this.matrix.getTransMatrix(0, value, 0);
-                this.updateTriangles(matrix);
+                matrix = TransformationMatrix.getTransMatrix(0, value, 0);
                 break;
             case AXIS.Z:
-                matrix = this.matrix.getTransMatrix(0, 0, value);
-                this.updateTriangles(matrix);
+                matrix = TransformationMatrix.getTransMatrix(0, 0, value);
                 break;
         }
+
+        this.updateTriangles(matrix);
     }
 
     zoom(sign, value) {
         switch (sign) {
-            case ZOOM.IN:
+            case ZOOM.IN: {
                 focalLength.value += value;
                 focalLength.zoomOut = true;
                 break;
-            case ZOOM.OUT:
+            }
+            case ZOOM.OUT: {
                 const tmpFocalLength = focalLength.value - value;
                 if (tmpFocalLength < 0) {
                     focalLength.zoomOut = false;
@@ -75,7 +67,7 @@ export class Transformation {
                     focalLength.value = tmpFocalLength;
                 }
                 break;
+            }
         }
     }
-
 }

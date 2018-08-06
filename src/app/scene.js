@@ -12,18 +12,23 @@ export class Scene {
     }
 
     to2DPoint(point3D) {
-
         const tmp = focalLength.value / point3D.z;
-        const x = tmp*point3D.x + this.canvas.width/2;
-        const y =  this.canvas.height/2 - tmp*point3D.y;
+        const x = tmp * point3D.x + this.canvas.width / 2;
+        const y = this.canvas.height / 2 - tmp * point3D.y;
 
-        return new Point2D(x,y);
+        return new Point2D(x, y);
     }
 
     make2DProjection() {
         this.scenesObjects.sortedTriangles.forEach((t) => {
             if(isVisible(t.a) && isVisible(t.b) && isVisible(t.c)) {
-                this.scenesObjects.add2DTriangle(new Triangle(this.to2DPoint(t.a), this.to2DPoint(t.b), this.to2DPoint(t.c)));
+                this.scenesObjects.add2DTriangle(
+                    new Triangle(
+                        this.to2DPoint(t.a), 
+                        this.to2DPoint(t.b), 
+                        this.to2DPoint(t.c)
+                    )
+                );
             }
         });
     }
@@ -40,8 +45,6 @@ export class Scene {
             this.ctx.stroke();
             this.ctx.fill();
             this.ctx.closePath();
-       });
-
+        });
     }
-
 }

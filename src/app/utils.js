@@ -1,4 +1,6 @@
 import { Point3D } from './point3D';
+import { DEFAULT_MATRIX, AXIS, ZOOM } from './consts';
+import { initialValues } from './options';
 
 //based on http://kb.komires.net/article.php?id=2
 export function computeVectorProduct(triangle) {
@@ -28,8 +30,8 @@ export function computeNormalVector(point) {
 export function getPointPositionRelativeToPlane(triangle, point) {
     const normalVect = computeNormalVector(computeVectorProduct(triangle));
     return Math.round(
-            computeScalarProduct(normalVect, point) - computeScalarProduct(normalVect, triangle.a)
-           );
+        computeScalarProduct(normalVect, point) - computeScalarProduct(normalVect, triangle.a)
+    );
 }
 
 export function multiplyMatrixByVector(matrix, vector) {
@@ -39,7 +41,7 @@ export function multiplyMatrixByVector(matrix, vector) {
             finalVector[i] += matrix[i][j] * vector[j];
         }
     }
-    
+
     return finalVector;
 }
 
@@ -48,25 +50,59 @@ export function createVector(point3D) {
 }
 
 export function isVisible(point) {
-    return point.z >= 0; 
+    return point.z >= 0;
 }
 
 export function isNumeric(n) {
     return !isNaN(+n) && isFinite(n);
 }
 
+export function makeBaseMatrix() {
+    return DEFAULT_MATRIX.map((arr) => arr.slice(0));
+}
+
+export function getAxis(axis) {
+    return axis === "X" ? AXIS.X : (axis === "Y" ? AXIS.Y : AXIS.Z);
+}
+
+export function getSignedRotationValue(sign) {
+    return sign === "pos" ? initialValues.rotate : -initialValues.rotate;
+}
+
+export function getSignedTranslationValue(sign) {
+    return sign === "pos" ? initialValues.translate : -initialValues.translate;
+}
+
+export function getZoomSign(sign) {
+    return sign === "in" ? ZOOM.IN : ZOOM.OUT;
+}
+
+export function updateInitialValue(idElem, newValue) {
+    switch (idElem) {
+        case "translate-value":
+            initialValues.translate = newValue;
+            break;
+        case "rotate-value":
+            initialValues.rotate = newValue;
+            break;
+        case "zoom-value":
+            initialValues.zoom = newValue;
+            break;
+    }
+}
+
 //from underscore.js
 export function debounce(func, wait, immediate) {
-	var timeout;
-	return function() {
-		var context = this, args = arguments;
-		var later = function() {
-			timeout = null;
-			if (!immediate) func.apply(context, args);
-		};
-		var callNow = immediate && !timeout;
-		clearTimeout(timeout);
-		timeout = setTimeout(later, wait);
-		if (callNow) func.apply(context, args);
-	};
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
 };

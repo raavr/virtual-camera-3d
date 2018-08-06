@@ -1,5 +1,12 @@
 export const ROUND_PRECISION = 100000;
 
+export const DEFAULT_MATRIX = [
+    [1, 0, 0, 0],
+    [0, 1, 0, 0],
+    [0, 0, 1, 0],
+    [0, 0, 0, 1]
+];
+
 export const AXIS = {
     X: 0,
     Y: 1,
